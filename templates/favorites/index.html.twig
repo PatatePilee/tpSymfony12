@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Favorites</title>
+</head>
+<body>
+    <h1>My Favorites</h1>
+    <ul>
+        {% for favorite in favorites %}
+            <li>{{ favorite }}</li>
+        {% else %}
+            <li>No favorites found.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
