@@ -2,22 +2,60 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+use App\Repository\TrackRepository; 
+
+#[ORM\Entity(repositoryClass: TrackRepository::class)]
 class Track
 {
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: "integer")]
+    private ?int $id = null;
+
+    #[ORM\Column(type: "integer")]
     private int $discNumber;
+
+    #[ORM\Column(type: "integer")]
     private int $durationMs;
+
+    #[ORM\Column(type: "boolean")]
     private bool $explicit;
+
+    #[ORM\Column(type: "string", length: 255)]
     private string $isrc;
+
+    #[ORM\Column(type: "string", length: 255)]
     private string $spotifyUrl;
+
+    #[ORM\Column(type: "string", length: 255)]
     private string $href;
-    private string $id;
+
+    #[ORM\Column(type: "string", length: 255)]
+    private string $spotifyId;
+
+    #[ORM\Column(type: "boolean")]
     private bool $isLocal;
+
+    #[ORM\Column(type: "string", length: 255)]
     private string $name;
+
+    #[ORM\Column(type: "integer")]
     private int $popularity;
+
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
     private ?string $previewUrl;
+
+    #[ORM\Column(type: "integer")]
     private int $trackNumber;
+
+    #[ORM\Column(type: "string", length: 255)]
     private string $type;
+
+    #[ORM\Column(type: "string", length: 255)]
     private string $uri;
+
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
     private ?string $pictureLink;
 
     public function __construct(
@@ -27,7 +65,7 @@ class Track
         string $isrc,
         string $spotifyUrl,
         string $href,
-        string $id,
+        string $spotifyId,
         bool $isLocal,
         string $name,
         int $popularity,
@@ -43,7 +81,7 @@ class Track
         $this->isrc = $isrc;
         $this->spotifyUrl = $spotifyUrl;
         $this->href = $href;
-        $this->id = $id;
+        $this->spotifyId = $spotifyId;
         $this->isLocal = $isLocal;
         $this->name = $name;
         $this->popularity = $popularity;
@@ -54,10 +92,22 @@ class Track
         $this->pictureLink = $pictureLink;
     }
 
-    // Getters for all properties
+    // Getters and setters for each property
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
     public function getDiscNumber(): int
     {
         return $this->discNumber;
+    }
+
+    public function setDiscNumber(int $discNumber): self
+    {
+        $this->discNumber = $discNumber;
+        return $this;
     }
 
     public function getDurationMs(): int
@@ -65,9 +115,21 @@ class Track
         return $this->durationMs;
     }
 
+    public function setDurationMs(int $durationMs): self
+    {
+        $this->durationMs = $durationMs;
+        return $this;
+    }
+
     public function isExplicit(): bool
     {
         return $this->explicit;
+    }
+
+    public function setExplicit(bool $explicit): self
+    {
+        $this->explicit = $explicit;
+        return $this;
     }
 
     public function getIsrc(): string
@@ -75,9 +137,21 @@ class Track
         return $this->isrc;
     }
 
+    public function setIsrc(string $isrc): self
+    {
+        $this->isrc = $isrc;
+        return $this;
+    }
+
     public function getSpotifyUrl(): string
     {
         return $this->spotifyUrl;
+    }
+
+    public function setSpotifyUrl(string $spotifyUrl): self
+    {
+        $this->spotifyUrl = $spotifyUrl;
+        return $this;
     }
 
     public function getHref(): string
@@ -85,9 +159,21 @@ class Track
         return $this->href;
     }
 
-    public function getId(): string
+    public function setHref(string $href): self
     {
-        return $this->id;
+        $this->href = $href;
+        return $this;
+    }
+
+    public function getSpotifyId(): string
+    {
+        return $this->spotifyId;
+    }
+
+    public function setSpotifyId(string $spotifyId): self
+    {
+        $this->spotifyId = $spotifyId;
+        return $this;
     }
 
     public function isLocal(): bool
@@ -95,9 +181,21 @@ class Track
         return $this->isLocal;
     }
 
+    public function setIsLocal(bool $isLocal): self
+    {
+        $this->isLocal = $isLocal;
+        return $this;
+    }
+
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+        return $this;
     }
 
     public function getPopularity(): int
@@ -105,9 +203,21 @@ class Track
         return $this->popularity;
     }
 
+    public function setPopularity(int $popularity): self
+    {
+        $this->popularity = $popularity;
+        return $this;
+    }
+
     public function getPreviewUrl(): ?string
     {
         return $this->previewUrl;
+    }
+
+    public function setPreviewUrl(?string $previewUrl): self
+    {
+        $this->previewUrl = $previewUrl;
+        return $this;
     }
 
     public function getTrackNumber(): int
@@ -115,9 +225,21 @@ class Track
         return $this->trackNumber;
     }
 
+    public function setTrackNumber(int $trackNumber): self
+    {
+        $this->trackNumber = $trackNumber;
+        return $this;
+    }
+
     public function getType(): string
     {
         return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
+        return $this;
     }
 
     public function getUri(): string
@@ -125,8 +247,20 @@ class Track
         return $this->uri;
     }
 
-    public function getPictureLink(): string
+    public function setUri(string $uri): self
+    {
+        $this->uri = $uri;
+        return $this;
+    }
+
+    public function getPictureLink(): ?string
     {
         return $this->pictureLink;
+    }
+
+    public function setPictureLink(?string $pictureLink): self
+    {
+        $this->pictureLink = $pictureLink;
+        return $this;
     }
 }
