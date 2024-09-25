@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Track Details{% endblock %}
+
+{% block body %}
+    <h1>Details for {{ track.name }}</h1>
+    <div>
+        <img src="{{ track.album.images[0].url }}" alt="{{ track.name }} album cover" width="200" height="200">
+        <p><strong>Album:</strong> {{ track.album.name }}</p>
+        <p><strong>Artists:</strong> 
+            {% for artist in track.artists %}
+                {{ artist.name }}{% if not loop.last %}, {% endif %}
+            {% endfor %}
+        </p>
+        <p><strong>Release Date:</strong> {{ track.album.release_date }}</p>
+        <p><strong>Duration:</strong> {{ track.duration_ms // 1000 }} seconds</p>
+    </div>
+
+    <h2>Recommendations</h2>
+    <ul>
+        {% for recommended in recommendations %}
+            <li>
+                <img src="{{ recommended.album.images[0].url }}" alt="Recommended album cover" width="50" height="50">
+                {{ recommended.name }} by
+                {% for artist in recommended.artists %}
+                    {{ artist.name }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ path('app_search_index') }}">Back to Search</a>
+{% endblock %}
